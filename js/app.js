@@ -40,15 +40,35 @@ Player.prototype.update = function(dt) {
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+Player.prototype.handleInput = function(keyCode) {
+	switch (keyCode) {
+		case 'left':
+			this.x -= 100;		
+			break;
+		case 'up':
+			this.y -= 100;
+			break;
+		case 'right':
+			this.x += 100;
+			break;
+		case 'down':
+			this.y += 100;
+		default:
+			break;
+	}
+};
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+//starting coordiantes (200,400) is bottom center block; block to block movement is +/- 100
 let player = new Player(200,400);
 
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
+	console.log(e.keyCode);
     var allowedKeys = {
         37: 'left',
         38: 'up',
