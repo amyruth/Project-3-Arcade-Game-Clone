@@ -44,25 +44,34 @@ Player.prototype.render = function() {
 Player.prototype.handleInput = function(keyCode) {
 	switch (keyCode) {
 		case 'left':
-			this.x -= 100;		
+			this.x -= 50;		
 			break;
 		case 'up':
-			this.y -= 100;
+			this.y -= 50;
 			break;
 		case 'right':
-			this.x += 100;
+			this.x += 50;
 			break;
 		case 'down':
-			this.y += 100;
+			this.y += 50;
 		default:
 			break;
 	}
+	if(player.y === -25){
+		//win and reset position
+		player.x = 200;
+		player.y = 425;
+	}
+	// if x = 0 or 400 stop player from moving off the field
+	console.log(this.x, this.y);
 };
+
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 //starting coordiantes (200,400) is bottom center block; block to block movement is +/- 100
-let player = new Player(200,400);
+let player = new Player(200,425);
 
 
 // This listens for key presses and sends the keys to your
