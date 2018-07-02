@@ -78,6 +78,7 @@ var Engine = (function(global) {
      * on the entities themselves within your app.js file).
      */
     function update(dt) {
+		
         updateEntities(dt);
         // checkCollisions();
     }
@@ -150,14 +151,9 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
+		
         allEnemies.forEach(function(enemy) {
-			let enemyYVal = [60, 140, 225];
-			let pickRow = function (arr) {
-				return arr[Math.floor(Math.random() * arr.length)];
-			};
-
-			this.y = pickRow(enemyYVal);
-            enemy.render();
+			enemy.render();
         });
 		player.render();
     }

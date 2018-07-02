@@ -1,16 +1,39 @@
+function randomSpeed(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1)) + min; 
+}
+
+const randomRow = function() {
+ return [60, 140, 225][Math.floor(Math.random() * [60, 140, 225].length)];
+};
+	
 // Enemies our player must avoid
-let Enemy = function(x,y) {
+let Enemy = function(x) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
 	this.sprite = 'images/enemy-bug.png';
-	this.x = x;
-	this.y = y;
+	this.x = -100;
+	this.y = randomRow();
+	this.speed = randomSpeed(2, 8);
 };
 
-const allEnemies = [new Enemy(-100, 225), new Enemy(-100, 225), new Enemy(-100, 225)];
+let enemy1 = new Enemy();
+let enemy2 = new Enemy();
+let enemy3 = new Enemy();
+let enemy4 = new Enemy();
+let enemy5 = new Enemy();
+
+const allEnemies = [];
+
+allEnemies.push(enemy1);
+allEnemies.push(enemy2);
+allEnemies.push(enemy3);
+// allEnemies.push(enemy4);
+// allEnemies.push(enemy5);
 
 
 // Update the enemy's position, required method for game
@@ -18,11 +41,21 @@ const allEnemies = [new Enemy(-100, 225), new Enemy(-100, 225), new Enemy(-100, 
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
-    // all computers.
+	// all computers.
+	
+	this.offScreenX = this.x > 501;
+	if(this.offScreenX){
+		this.x = -100
+		this.y = randomRow();
+		this.speed = randomSpeed(2, 8);
+	}else{
+		this.x += this.speed + dt; 
+	}
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
+	
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
