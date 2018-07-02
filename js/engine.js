@@ -78,7 +78,7 @@ var Engine = (function(global) {
      * on the entities themselves within your app.js file).
      */
     function update(dt) {
-        // updateEntities(dt);
+        updateEntities(dt);
         // checkCollisions();
     }
 
@@ -89,12 +89,12 @@ var Engine = (function(global) {
      * the data/properties related to the object. Do your drawing in your
      * render methods.
      */
-    // function updateEntities(dt) {
-    //     allEnemies.forEach(function(enemy) {
-    //         enemy.update(dt);
-    //     });
-    //     player.update();
-    // }
+    function updateEntities(dt) {
+        allEnemies.forEach(function(enemy) {
+            enemy.update(dt);
+        });
+        player.update();
+    }
 
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
@@ -119,7 +119,7 @@ var Engine = (function(global) {
             row, col;
 
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ctx.clearRect(0,0,canvas.width,canvas.height);
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
@@ -145,15 +145,21 @@ var Engine = (function(global) {
      * tick. Its purpose is to then call the render functions you have defined
      * on your enemy and player entities within app.js
      */
+
     function renderEntities() {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-        // allEnemies.forEach(function(enemy) {
-        //     enemy.render();
-        // });
+        allEnemies.forEach(function(enemy) {
+			let enemyYVal = [60, 140, 225];
+			let pickRow = function (arr) {
+				return arr[Math.floor(Math.random() * arr.length)];
+			};
 
-        player.render();
+			this.y = pickRow(enemyYVal);
+            enemy.render();
+        });
+		player.render();
     }
 
     /* This function does nothing but it could have been a good place to

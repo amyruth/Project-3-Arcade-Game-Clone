@@ -1,12 +1,17 @@
 // Enemies our player must avoid
-var Enemy = function() {
+let Enemy = function(x,y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
+	this.sprite = 'images/enemy-bug.png';
+	this.x = x;
+	this.y = y;
 };
+
+const allEnemies = [new Enemy(-100, 225), new Enemy(-100, 225), new Enemy(-100, 225)];
+
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -42,37 +47,49 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.handleInput = function(keyCode) {
-	switch (keyCode) {
-		case 'left':
-			this.x -= 50;		
-			break;
-		case 'up':
-			this.y -= 50;
-			break;
-		case 'right':
-			this.x += 50;
-			break;
-		case 'down':
-			this.y += 50;
-		default:
-			break;
+	
+		switch (keyCode) {
+			case 'left':
+				this.x -= 101;		
+				break;
+			case 'up':
+				this.y -= 82;
+				break;
+			case 'right':
+				this.x += 101;
+				break;
+			case 'down':
+				this.y += 82;
+			default:
+				break;
+		}
+
+	if(player.x < -2){
+		player.x = -2;
+	} else if(player.x > 402){
+		player.x = 402;
 	}
-	if(player.y === -25){
+
+	if(player.y === -10 || player.y > 400){
 		//win and reset position
 		player.x = 200;
-		player.y = 425;
+		player.y = 400;
 	}
 	// if x = 0 or 400 stop player from moving off the field
-	console.log(this.x, this.y);
+	console.table(player);
 };
 
+// function randomPosition() {
+// 	const min = Math.ceil(1);
+// 	const max = Math.floor(3);
+// 	return Math.floor(Math.random() * (max - min)) + 1;
+// }
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 //starting coordiantes (200,400) is bottom center block; block to block movement is +/- 100
-let player = new Player(200,425);
-
+let player = new Player(200,400);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -84,6 +101,5 @@ document.addEventListener('keyup', function(e) {
         39: 'right',
         40: 'down'
     };
-
     player.handleInput(allowedKeys[e.keyCode]);
 });
