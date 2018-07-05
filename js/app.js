@@ -21,27 +21,27 @@ function keepScore() {
 	scoreArea.textContent = score;
 }
 
-function checkCollisions() {
-	if (player.x + 10 > enemy1.x - 10 && 
-		player.x - 10 < enemy1.x + 10 &&
-		player.y + 10 > enemy1.y - 10 &&
-		player.y - 10 < enemy1.y + 10) {
-		console.log('hit 1');
-		playerReset();
-	} else if (player.x + 10 > enemy2.x - 10 &&
-		player.x - 10 < enemy2.x + 10 &&
-		player.y + 10 > enemy2.y - 10 &&
-		player.y - 10 < enemy2.y + 10) {
-		console.log('hit 2');
-		playerReset();
-	} else if (player.x + 10 > enemy3.x - 10 &&
-		player.x - 10 < enemy3.x + 10 &&
-		player.y + 10 > enemy3.y - 10 &&
-		player.y - 10 < enemy3.y + 10) {
-		console.log('hit 3');
-		playerReset();
-	}
-}
+// function checkCollisions() {
+// 	if (player.x + 10 > enemy1.x - 10 && 
+// 		player.x - 10 < enemy1.x + 10 &&
+// 		player.y + 10 > enemy1.y - 10 &&
+// 		player.y - 10 < enemy1.y + 10) {
+// 		console.log('hit 1');
+// 		playerReset();
+// 	} else if (player.x + 10 > enemy2.x - 10 &&
+// 		player.x - 10 < enemy2.x + 10 &&
+// 		player.y + 10 > enemy2.y - 10 &&
+// 		player.y - 10 < enemy2.y + 10) {
+// 		console.log('hit 2');
+// 		playerReset();
+// 	} else if (player.x + 10 > enemy3.x - 10 &&
+// 		player.x - 10 < enemy3.x + 10 &&
+// 		player.y + 10 > enemy3.y - 10 &&
+// 		player.y - 10 < enemy3.y + 10) {
+// 		console.log('hit 3');
+// 		playerReset();
+// 	}
+// }
 
 function resetGame(){
 	playerReset();
@@ -78,7 +78,7 @@ Enemy.prototype.update = function (dt) {
 	// You should multiply any movement by the dt parameter
 	// which will ensure the game runs at the same speed for
 	// all computers.
-
+	this.checkCollisions();
 	//point where enemy goes off screen right
 	this.endOfRowX = this.x > 501;
 
@@ -96,6 +96,15 @@ Enemy.prototype.render = function () {
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+Enemy.prototype.checkCollisions = function () {
+	if (player.x + 10 > this.x - 10 && 
+		player.x - 10 < this.x + 10 &&
+		player.y + 10 > this.y - 10 &&
+		player.y - 10 < this.y + 10) {
+			console.log('hit 1');
+			playerReset();
+		}	
+};
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -112,10 +121,8 @@ Player.prototype.update = function (dt) {
 	if (this.y === -10) {
 		//win and reset position
 		keepScore();
-		playerReset();
-		
+		playerReset();	
 	}
-	checkCollisions();
 };
 
 
