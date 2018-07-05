@@ -1,4 +1,18 @@
 body {
-    text-align: center;
+	text-align: center;
+	font-family: 'Orbitron', sans-serif;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.scoring {
+	border: 1px solid black;
+	display: flex;
+	justify-content: space-between;
+	font-size: 22px;
+	width: 31%;
+	margin-bottom: -40px;
 }
 
