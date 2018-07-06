@@ -164,6 +164,14 @@ var Engine = (function (global) {
 	 */
 	function reset() {
 		// noop
+		window.addEventListener('load', function() {
+			const gameModal = document.querySelector('.gameStart');
+			gameModal.classList.remove('modal-hide');
+			setTimeout(function() {
+				gameModal.classList.add('modal-hide');
+			}, 3000);
+		});
+
 	}
 
 	/* Go ahead and load all of the images we know we're going to need to

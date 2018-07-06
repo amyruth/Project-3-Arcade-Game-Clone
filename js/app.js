@@ -21,28 +21,6 @@ function keepScore() {
 	scoreArea.textContent = score;
 }
 
-// function checkCollisions() {
-// 	if (player.x + 10 > enemy1.x - 10 && 
-// 		player.x - 10 < enemy1.x + 10 &&
-// 		player.y + 10 > enemy1.y - 10 &&
-// 		player.y - 10 < enemy1.y + 10) {
-// 		console.log('hit 1');
-// 		playerReset();
-// 	} else if (player.x + 10 > enemy2.x - 10 &&
-// 		player.x - 10 < enemy2.x + 10 &&
-// 		player.y + 10 > enemy2.y - 10 &&
-// 		player.y - 10 < enemy2.y + 10) {
-// 		console.log('hit 2');
-// 		playerReset();
-// 	} else if (player.x + 10 > enemy3.x - 10 &&
-// 		player.x - 10 < enemy3.x + 10 &&
-// 		player.y + 10 > enemy3.y - 10 &&
-// 		player.y - 10 < enemy3.y + 10) {
-// 		console.log('hit 3');
-// 		playerReset();
-// 	}
-// }
-
 function resetGame(){
 	playerReset();
 	score = 0;
@@ -97,10 +75,10 @@ Enemy.prototype.render = function () {
 };
 
 Enemy.prototype.checkCollisions = function () {
-	if (player.x + 30 > this.x - 30 && 
-		player.x - 30 < this.x + 30 &&
-		player.y + 30 > this.y - 30 &&
-		player.y - 30 < this.y + 30) {
+	if (player.x + 25 > this.x - 25 && 
+		player.x - 25 < this.x + 25 &&
+		player.y + 25 > this.y - 25 &&
+		player.y - 25 < this.y + 25) {
 			console.log('hit 1');
 			playerReset();
 		}	
