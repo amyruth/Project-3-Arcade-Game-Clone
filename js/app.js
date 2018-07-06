@@ -97,10 +97,10 @@ Enemy.prototype.render = function () {
 };
 
 Enemy.prototype.checkCollisions = function () {
-	if (player.x + 10 > this.x - 10 && 
-		player.x - 10 < this.x + 10 &&
-		player.y + 10 > this.y - 10 &&
-		player.y - 10 < this.y + 10) {
+	if (player.x + 30 > this.x - 30 && 
+		player.x - 30 < this.x + 30 &&
+		player.y + 30 > this.y - 30 &&
+		player.y - 30 < this.y + 30) {
 			console.log('hit 1');
 			playerReset();
 		}	
@@ -124,7 +124,6 @@ Player.prototype.update = function (dt) {
 		playerReset();	
 	}
 };
-
 
 // Draw the enemy on the screen, required method for game
 Player.prototype.render = function () {
