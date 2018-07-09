@@ -171,7 +171,6 @@ var Engine = (function (global) {
 				gameModal.classList.add('modal-hide');
 			}, 1600);
 		});
-
 	}
 
 	/* Go ahead and load all of the images we know we're going to need to

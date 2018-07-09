@@ -5,12 +5,29 @@ function randomSpeed(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// let score = 0;
-const scoreArea = document.getElementById('score');
-const lives = document.getElementById('lives');
 const randomRow = function () {
 	return [60, 140, 225][Math.floor(Math.random() * [60, 140, 225].length)];
 };
+
+let score = 0;
+const scoreArea = document.getElementById('score');
+const lives = document.getElementById('lives');
+const gameOver = document.querySelector('.gameOver');
+const redoButton = document.querySelector('#redo');
+
+function gameReset() {
+	scoreArea.textContent = 0;
+	player.lives = 3;
+	lives.textContent = 3;
+}
+function keepScore () {
+	score+= 10;
+	scoreArea.textContent = score;
+}
+
+function endGame () {
+	gameOver.classList.remove('modal-hide');
+}
 
 // Enemies our player must avoid
 let Enemy = function () {
@@ -60,13 +77,13 @@ Enemy.prototype.render = function () {
 };
 
 Enemy.prototype.checkCollisions = function () {
-	if (player.x + 25 > this.x - 25 &&
-		player.x - 25 < this.x + 25 &&
-		player.y + 25 > this.y - 25 &&
-		player.y - 25 < this.y + 25) {
-			player.livesLeft();
-			player.playerReset();
-		}
+		if (player.x + 25 > this.x - 25 &&
+			player.x - 25 < this.x + 25 &&
+			player.y + 25 > this.y - 25 &&
+			player.y - 25 < this.y + 25) {
+				player.livesLeft();
+				player.playerReset();
+			}
 	};
 	// Now write your own player class
 	// This class requires an update(), render() and
@@ -76,7 +93,6 @@ let Player = function (x, y) {
 	this.sprite = 'images/char-cat-girl.png';
 	this.x = x;
 	this.y = y;
-	this.score = 0;
 	this.lives = 3;
 };
 
@@ -86,14 +102,13 @@ Player.prototype.update = function () {
 	// all computers.
 	if (this.y === -10) {
 		//win and reset position
-		this.keepScore();
+		keepScore();
 		this.playerReset();
 	}
-};
 
-Player.prototype.keepScore = function () {
-	this.score+= 10;
-	scoreArea.textContent = this.score;
+	if(this.lives === 0) {
+		endGame();
+	}
 };
 
 Player.prototype.livesLeft = function () {
@@ -161,3 +176,11 @@ document.addEventListener('keyup', function (e) {
 	};
 	player.handleInput(allowedKeys[e.keyCode]);
 });
+
+gameOver.addEventListener('click', function() {
+	console.log("clicked");
+	gameReset();
+	gameOver.classList.add('modal-hide');
+});
+
+redoButton.addEventListener('click', gameReset, false);
