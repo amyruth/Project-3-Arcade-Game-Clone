@@ -14,20 +14,23 @@ const scoreArea = document.getElementById('score');
 const lives = document.getElementById('lives');
 const gameOver = document.querySelector('.gameOver');
 const redoButton = document.querySelector('#redo');
+const winModal = document.querySelector('.winScreen');
 
 function gameReset() {
 	scoreArea.textContent = 0;
+	score = 0;
 	player.lives = 3;
 	lives.textContent = 3;
 }
 function keepScore () {
-	score+= 10;
+	score+= 20;
 	scoreArea.textContent = score;
 }
 
 function endGame () {
 	gameOver.classList.remove('modal-hide');
 }
+
 
 // Enemies our player must avoid
 let Enemy = function () {
@@ -109,6 +112,10 @@ Player.prototype.update = function () {
 	if(this.lives === 0) {
 		endGame();
 	}
+
+	if(score === 200) {
+		winModal.classList.remove('modal-hide');
+	}
 };
 
 Player.prototype.livesLeft = function () {
@@ -183,4 +190,7 @@ gameOver.addEventListener('click', function() {
 	gameOver.classList.add('modal-hide');
 });
 
-redoButton.addEventListener('click', gameReset, false);
+winModal.addEventListener('click', function() {
+	gameReset();
+	winModal.classList.add('modal-hide');
+});
