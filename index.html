@@ -4,24 +4,25 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Effective JavaScript: Frogger</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-
-
 		<div class="scoring">
-			<span>
+			<span>Lives:
+				<span id="lives">3</span>
 				<i class="fa fa-refresh refreshButton" aria-hidden="true"></i>
 			</span>
+
+			<span><i class="fas fa-redo"></i></span>
 			<span>Score:
-				<span id="score">
-					<!-- score goes here -->
-				</span>
+				<span id="score">0</span>
 			</span>
 		</div>
-		<div class="gameStart modal-hide">
+
+		<div class="gameStart modal modal-hide">
 			<img src="images/char-cat-girl.png" alt="">
 			<div class="div">
 				<p>Game Start</p>
@@ -30,8 +31,16 @@
 					Avoid the bugs!
 				</p>
 			</div>
-			
 		</div>
+
+		<div class="gameOver modal modal-hide">
+				<div class="div">
+					<p>Game Over</p>
+					<p class="instructions">
+						Play Again?
+					</p>
+				</div>
+			</div>
 
 	<script src="js/resources.js"></script>
 	<script src="js/engine.js"></script>

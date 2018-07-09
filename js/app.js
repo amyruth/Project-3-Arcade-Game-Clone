@@ -7,16 +7,10 @@ function randomSpeed(min, max) {
 
 // let score = 0;
 const scoreArea = document.getElementById('score');
-
+const lives = document.getElementById('lives');
 const randomRow = function () {
 	return [60, 140, 225][Math.floor(Math.random() * [60, 140, 225].length)];
 };
-
-function playerReset() {
-	player.x = 200;
-	player.y = 400;
-}
-
 
 // Enemies our player must avoid
 let Enemy = function () {
@@ -70,13 +64,14 @@ Enemy.prototype.checkCollisions = function () {
 		player.x - 25 < this.x + 25 &&
 		player.y + 25 > this.y - 25 &&
 		player.y - 25 < this.y + 25) {
-			playerReset();
+			player.livesLeft();
+			player.playerReset();
 		}
 	};
 	// Now write your own player class
 	// This class requires an update(), render() and
 	// a handleInput() method.
-	
+
 let Player = function (x, y) {
 	this.sprite = 'images/char-cat-girl.png';
 	this.x = x;
@@ -92,7 +87,7 @@ Player.prototype.update = function () {
 	if (this.y === -10) {
 		//win and reset position
 		this.keepScore();
-		playerReset();
+		this.playerReset();
 	}
 };
 
@@ -100,6 +95,17 @@ Player.prototype.keepScore = function () {
 	this.score+= 10;
 	scoreArea.textContent = this.score;
 };
+
+Player.prototype.livesLeft = function () {
+	this.lives--;
+	lives.textContent = this.lives;
+};
+
+Player.prototype.playerReset = function () {
+	player.x = 200;
+	player.y = 400;
+};
+
 // Draw the enemy on the screen, required method for game
 Player.prototype.render = function () {
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);

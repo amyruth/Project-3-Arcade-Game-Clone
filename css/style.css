@@ -17,7 +17,7 @@ body {
 	margin-bottom: -40px;
 }
 
-.gameStart {
+.modal {
 	display: flex;
 	justify-content: space-evenly;
 	flex-direction: row;
