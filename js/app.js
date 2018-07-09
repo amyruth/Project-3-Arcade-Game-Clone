@@ -13,7 +13,6 @@ let score = 0;
 const scoreArea = document.getElementById('score');
 const lives = document.getElementById('lives');
 const gameOver = document.querySelector('.gameOver');
-const redoButton = document.querySelector('#redo');
 const winModal = document.querySelector('.winScreen');
 
 function gameReset() {
@@ -162,8 +161,6 @@ Player.prototype.handleInput = function (keyCode) {
 	if (player.y > 400) {
 		player.y = 400;
 	}
-
-	console.table(player);
 };
 
 // Now instantiate your objects.
@@ -185,7 +182,6 @@ document.addEventListener('keyup', function (e) {
 });
 
 gameOver.addEventListener('click', function() {
-	console.log("clicked");
 	gameReset();
 	gameOver.classList.add('modal-hide');
 });
