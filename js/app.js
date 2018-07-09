@@ -1,3 +1,4 @@
+/* eslint-disable indent*/
 function randomSpeed(min, max) {
 	min = Math.ceil(min);
 	max = Math.floor(max);
@@ -16,22 +17,12 @@ function playerReset() {
 	player.y = 400;
 }
 
-function keepScore() {
-	score += 10;
-	scoreArea.textContent = score;
-}
-
-function resetGame(){
-	playerReset();
-	score = 0;
-}
-
 
 // Enemies our player must avoid
 let Enemy = function () {
 	// Variables applied to each of our instances go here,
 	// we've provided one for you to get started
-
+	
 	// The image/sprite for our enemies, this uses
 	// a helper we've provided to easily load images
 	this.sprite = 'images/enemy-bug.png';
@@ -59,9 +50,9 @@ Enemy.prototype.update = function (dt) {
 	this.checkCollisions();
 	//point where enemy goes off screen right
 	this.endOfRowX = this.x > 501;
-
+	
 	if (this.endOfRowX) {
-		this.x = -100
+		this.x = -100;
 		this.y = randomRow();
 		this.speed = randomSpeed(2, 7);
 	} else {
@@ -75,21 +66,30 @@ Enemy.prototype.render = function () {
 };
 
 Enemy.prototype.checkCollisions = function () {
-	if (player.x + 25 > this.x - 25 && 
+	if (player.x + 25 > this.x - 25 &&
 		player.x - 25 < this.x + 25 &&
 		player.y + 25 > this.y - 25 &&
 		player.y - 25 < this.y + 25) {
-			console.log('hit 1');
 			playerReset();
-		}	
-};
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-let Player = function (x, y) {
-	this.sprite = 'images/char-cat-girl.png';
-	this.x = x;
-	this.y = y;
+		}
+	};
+	// Now write your own player class
+	// This class requires an update(), render() and
+	// a handleInput() method.
+		// function keepScore() {
+		// 	score += 10;
+		// 	scoreArea.textContent = score;
+		// }
+	let Player = function (x, y) {
+		this.sprite = 'images/char-cat-girl.png';
+		this.x = x;
+		this.y = y;
+		this.score = 0;
+		this.lives = 3;
+		this.keepScore = function() {
+			score += 10;
+			scoreArea.textContent = score;
+		};
 };
 
 Player.prototype.update = function (dt) {
@@ -98,8 +98,8 @@ Player.prototype.update = function (dt) {
 	// all computers.
 	if (this.y === -10) {
 		//win and reset position
-		keepScore();
-		playerReset();	
+		player.keepScore();
+		playerReset();
 	}
 };
 
@@ -122,6 +122,7 @@ Player.prototype.handleInput = function (keyCode) {
 			break;
 		case 'down':
 			this.y += 82;
+			break;
 		default:
 			break;
 	}
@@ -157,4 +158,3 @@ document.addEventListener('keyup', function (e) {
 	};
 	player.handleInput(allowedKeys[e.keyCode]);
 });
-

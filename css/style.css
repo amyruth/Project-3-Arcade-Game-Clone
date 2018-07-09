@@ -12,6 +12,7 @@ body {
 	display: flex;
 	justify-content: space-between;
 	font-size: 22px;
+	letter-spacing: 1px;
 	width: 505px;
 	margin-bottom: -40px;
 }

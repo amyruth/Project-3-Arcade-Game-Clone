@@ -169,7 +169,7 @@ var Engine = (function (global) {
 			gameModal.classList.remove('modal-hide');
 			setTimeout(function() {
 				gameModal.classList.add('modal-hide');
-			}, 3000);
+			}, 1600);
 		});
 
 	}
