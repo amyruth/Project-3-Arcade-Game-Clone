@@ -5,7 +5,7 @@ function randomSpeed(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-let score = 0;
+// let score = 0;
 const scoreArea = document.getElementById('score');
 
 const randomRow = function () {
@@ -76,33 +76,30 @@ Enemy.prototype.checkCollisions = function () {
 	// Now write your own player class
 	// This class requires an update(), render() and
 	// a handleInput() method.
-		// function keepScore() {
-		// 	score += 10;
-		// 	scoreArea.textContent = score;
-		// }
-	let Player = function (x, y) {
-		this.sprite = 'images/char-cat-girl.png';
-		this.x = x;
-		this.y = y;
-		this.score = 0;
-		this.lives = 3;
-		this.keepScore = function() {
-			score += 10;
-			scoreArea.textContent = score;
-		};
+	
+let Player = function (x, y) {
+	this.sprite = 'images/char-cat-girl.png';
+	this.x = x;
+	this.y = y;
+	this.score = 0;
+	this.lives = 3;
 };
 
-Player.prototype.update = function (dt) {
+Player.prototype.update = function () {
 	// You should multiply any movement by the dt parameter
 	// which will ensure the game runs at the same speed for
 	// all computers.
 	if (this.y === -10) {
 		//win and reset position
-		player.keepScore();
+		this.keepScore();
 		playerReset();
 	}
 };
 
+Player.prototype.keepScore = function () {
+	this.score+= 10;
+	scoreArea.textContent = this.score;
+};
 // Draw the enemy on the screen, required method for game
 Player.prototype.render = function () {
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
