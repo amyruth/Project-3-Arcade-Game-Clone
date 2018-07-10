@@ -44,8 +44,17 @@ var Engine = (function (global) {
 		/* Call our update/render functions, pass along the time delta to
 		 * our update function since it may be used for smooth animation.
 		 */
-		update(dt);
-		render();
+		
+		 //brings up win modal and pauses game
+		if (score === 200) {
+			winModal.classList.remove('modal-hide');
+		}else if (player.lives === 0){
+			endGame();
+		}else{
+			update(dt);
+			render();
+		}
+		
 
 		/* Set our lastTime variable which is used to determine the time delta
 		 * for the next time this function is called.
@@ -56,6 +65,7 @@ var Engine = (function (global) {
 		 * function again as soon as the browser is able to draw another frame.
 		 */
 		win.requestAnimationFrame(main);
+		
 	}
 
 	/* This function does some initial setup that should only occur once,

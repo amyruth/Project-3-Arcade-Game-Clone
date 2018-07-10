@@ -19,17 +19,19 @@ function gameReset() {
 	scoreArea.textContent = 0;
 	score = 0;
 	player.lives = 3;
+	player.winning = false;
 	lives.textContent = 3;
 }
+
 function keepScore () {
 	score+= 20;
 	scoreArea.textContent = score;
 }
 
+//out of lives/game over modal
 function endGame () {
 	gameOver.classList.remove('modal-hide');
 }
-
 
 // Enemies our player must avoid
 let Enemy = function () {
@@ -103,17 +105,9 @@ Player.prototype.update = function () {
 	// which will ensure the game runs at the same speed for
 	// all computers.
 	if (this.y === -10) {
-		//win and reset position
+		//win round and reset position
 		keepScore();
 		this.playerReset();
-	}
-
-	if(this.lives === 0) {
-		endGame();
-	}
-
-	if(score === 200) {
-		winModal.classList.remove('modal-hide');
 	}
 };
 
@@ -123,8 +117,8 @@ Player.prototype.livesLeft = function () {
 };
 
 Player.prototype.playerReset = function () {
-	player.x = 200;
-	player.y = 400;
+	this.x = 200;
+	this.y = 400;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -178,8 +172,10 @@ document.addEventListener('keyup', function (e) {
 		39: 'right',
 		40: 'down'
 	};
+	
 	player.handleInput(allowedKeys[e.keyCode]);
 });
+
 
 gameOver.addEventListener('click', function() {
 	gameReset();
