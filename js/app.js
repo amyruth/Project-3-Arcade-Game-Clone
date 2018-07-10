@@ -71,8 +71,7 @@
 	// Parameter: dt, a time delta between ticks
 	Enemy.prototype.update = function (dt) {
 		// You should multiply any movement by the dt parameter
-		// which will ensure the game runs at the same speed for
-		// all computers.
+		// which will ensure the game runs at the same speed for all computers.
 		this.checkCollisions();
 		//point where enemy goes off screen right
 		this.endOfRowX = this.x > 501;
@@ -186,7 +185,7 @@
 		player.handleInput(allowedKeys[e.keyCode]);
 	});
 
-
+	//Win/Lose modal handlers
 	gameOver.addEventListener('click', function () {
 		gameReset();
 		gameOver.classList.add('modal-hide');

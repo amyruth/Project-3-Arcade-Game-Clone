@@ -12,4 +12,4 @@ Player characters are generated randomly.
 3. Get 200 points and win, yay!
 
 ## Dependencies
-[Orbitron font from Google Fonts](https://fonts.google.com/specimen/Orbitron)
+[Orbitron](https://fonts.google.com/specimen/Orbitron) from Google Fonts
