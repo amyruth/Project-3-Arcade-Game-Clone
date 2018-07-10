@@ -1,6 +1,20 @@
 /* eslint-disable indent*/
 
-//used for random speed and random character chice
+let score = 0;
+const scoreArea = document.getElementById('score');
+const lives = document.getElementById('lives');
+const gameOver = document.querySelector('.gameOver');
+const winModal = document.querySelector('.winScreen');
+
+const players = [
+	'images/char-boy.png',
+	'images/char-cat-girl.png',
+	'images/char-horn-girl.png',
+	'images/char-pink-girl.png',
+	'images/char-princess-girl.png'
+];
+
+//used for random speed and random character choice
 function randomizer(min, max) {
 	min = Math.ceil(min);
 	max = Math.floor(max);
@@ -11,28 +25,22 @@ const randomRow = function () {
 	return [60, 140, 225][Math.floor(Math.random() * [60, 140, 225].length)];
 };
 
-let score = 0;
-const scoreArea = document.getElementById('score');
-const lives = document.getElementById('lives');
-const gameOver = document.querySelector('.gameOver');
-const winModal = document.querySelector('.winScreen');
-
 function gameReset() {
 	player.playerReset();
-	player.sprite = players[randomizer(0,4)];
-	scoreArea.textContent = 0;
-	score = 0;
+	player.sprite = players[randomizer(0, 4)];
 	player.lives = 3;
+	score = 0;
+	scoreArea.textContent = 0;
 	lives.textContent = 3;
 }
 
-function keepScore () {
-	score+= 20;
+function keepScore() {
+	score += 20;
 	scoreArea.textContent = score;
 }
 
 //out of lives/game over modal
-function endGame () {
+function endGame() {
 	gameOver.classList.remove('modal-hide');
 }
 
@@ -40,7 +48,7 @@ function endGame () {
 let Enemy = function () {
 	// Variables applied to each of our instances go here,
 	// we've provided one for you to get started
-	
+
 	// The image/sprite for our enemies, this uses
 	// a helper we've provided to easily load images
 	this.sprite = 'images/enemy-bug.png';
@@ -68,7 +76,7 @@ Enemy.prototype.update = function (dt) {
 	this.checkCollisions();
 	//point where enemy goes off screen right
 	this.endOfRowX = this.x > 501;
-	
+
 	if (this.endOfRowX) {
 		this.x = -100;
 		this.y = randomRow();
@@ -84,43 +92,27 @@ Enemy.prototype.render = function () {
 };
 
 Enemy.prototype.checkCollisions = function () {
-		if (player.x + 25 > this.x - 25 &&
-			player.x - 25 < this.x + 25 &&
-			player.y + 25 > this.y - 25 &&
-			player.y - 25 < this.y + 25) {
-				player.livesLeft();
-				player.playerReset();
-			}
-	};
-	// Now write your own player class
-	// This class requires an update(), render() and
-	// a handleInput() method.
+	if (player.x + 25 > this.x - 25 &&
+		player.x - 25 < this.x + 25 &&
+		player.y + 25 > this.y - 25 &&
+		player.y - 25 < this.y + 25) {
+		player.livesLeft();
+		player.playerReset();
+	}
+};
 
-const players = [
-	'images/char-boy.png',
-	'images/char-cat-girl.png',
-	'images/char-horn-girl.png',
-	'images/char-pink-girl.png',
-	'images/char-princess-girl.png'
-];
-
-// Player.prototype.randomChar = function(min, max) {
-// 	min = Math.ceil(min);
-// 	max = Math.floor(max);
-// 	return Math.floor(Math.random() * (max - min + 1)) + min;
-// }
+// Now write your own player class
+// This class requires an update(), render() and
+// a handleInput() method.
 
 let Player = function (x, y) {
-	this.sprite = players[randomizer(0,4)];
+	this.sprite = players[randomizer(0, 4)];
 	this.x = x;
 	this.y = y;
 	this.lives = 3;
 };
 
 Player.prototype.update = function () {
-	// You should multiply any movement by the dt parameter
-	// which will ensure the game runs at the same speed for
-	// all computers.
 	if (this.y === -10) {
 		//win round and reset position
 		keepScore();
@@ -177,7 +169,8 @@ Player.prototype.handleInput = function (keyCode) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-//starting coordiantes (200,400) is bottom center block; block to block movement is +/- 100
+
+//starting coordiantes (200,400) is bottom center block; block to block movement is +/- 100 units
 let player = new Player(200, 400);
 
 // This listens for key presses and sends the keys to your
@@ -194,12 +187,12 @@ document.addEventListener('keyup', function (e) {
 });
 
 
-gameOver.addEventListener('click', function() {
+gameOver.addEventListener('click', function () {
 	gameReset();
 	gameOver.classList.add('modal-hide');
 });
 
-winModal.addEventListener('click', function() {
+winModal.addEventListener('click', function () {
 	gameReset();
 	winModal.classList.add('modal-hide');
 });

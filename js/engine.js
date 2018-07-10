@@ -45,7 +45,7 @@ let Engine = (function (global) {
 		 * our update function since it may be used for smooth animation.
 		 */
 
-		//brings up win modal and pauses game
+		//brings up win modal and pauses game for win or lose condition
 		if (score === 200) {
 			winModal.classList.remove('modal-hide');
 		} else if (player.lives === 0) {
@@ -173,7 +173,7 @@ let Engine = (function (global) {
 	 * those sorts of things. It's only called once by the init() method.
 	 */
 	function reset() {
-		// noop
+		//game start/reset modal
 		window.addEventListener('load', function () {
 			const gameModal = document.querySelector('.gameStart');
 			gameModal.classList.remove('modal-hide');
