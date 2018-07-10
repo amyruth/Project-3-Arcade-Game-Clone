@@ -1,5 +1,7 @@
 /* eslint-disable indent*/
-function randomSpeed(min, max) {
+
+//used for random speed and random character chice
+function randomizer(min, max) {
 	min = Math.ceil(min);
 	max = Math.floor(max);
 	return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -16,10 +18,11 @@ const gameOver = document.querySelector('.gameOver');
 const winModal = document.querySelector('.winScreen');
 
 function gameReset() {
+	player.playerReset();
+	player.sprite = players[randomizer(0,4)];
 	scoreArea.textContent = 0;
 	score = 0;
 	player.lives = 3;
-	player.winning = false;
 	lives.textContent = 3;
 }
 
@@ -43,7 +46,7 @@ let Enemy = function () {
 	this.sprite = 'images/enemy-bug.png';
 	this.x = -100;
 	this.y = randomRow();
-	this.speed = randomSpeed(2, 7);
+	this.speed = randomizer(2, 7);
 };
 
 const allEnemies = [];
@@ -69,7 +72,7 @@ Enemy.prototype.update = function (dt) {
 	if (this.endOfRowX) {
 		this.x = -100;
 		this.y = randomRow();
-		this.speed = randomSpeed(2, 7);
+		this.speed = randomizer(2, 7);
 	} else {
 		this.x += this.speed + dt;
 	}
@@ -93,8 +96,22 @@ Enemy.prototype.checkCollisions = function () {
 	// This class requires an update(), render() and
 	// a handleInput() method.
 
+const players = [
+	'images/char-boy.png',
+	'images/char-cat-girl.png',
+	'images/char-horn-girl.png',
+	'images/char-pink-girl.png',
+	'images/char-princess-girl.png'
+];
+
+// Player.prototype.randomChar = function(min, max) {
+// 	min = Math.ceil(min);
+// 	max = Math.floor(max);
+// 	return Math.floor(Math.random() * (max - min + 1)) + min;
+// }
+
 let Player = function (x, y) {
-	this.sprite = 'images/char-cat-girl.png';
+	this.sprite = players[randomizer(0,4)];
 	this.x = x;
 	this.y = y;
 	this.lives = 3;
@@ -166,13 +183,13 @@ let player = new Player(200, 400);
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function (e) {
-	var allowedKeys = {
+	const allowedKeys = {
 		37: 'left',
 		38: 'up',
 		39: 'right',
 		40: 'down'
 	};
-	
+
 	player.handleInput(allowedKeys[e.keyCode]);
 });
 
