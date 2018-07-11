@@ -91,10 +91,10 @@
 	};
 
 	Enemy.prototype.checkCollisions = function () {
-		if (player.x + 25 > this.x - 25 &&
-			player.x - 25 < this.x + 25 &&
-			player.y + 25 > this.y - 25 &&
-			player.y - 25 < this.y + 25) {
+		if (player.x + 40 > this.x - 40 &&
+			player.x - 40 < this.x + 40 &&
+			player.y + 40 > this.y - 40 &&
+			player.y - 40 < this.y + 40) {
 			player.livesLeft();
 			player.playerReset();
 		}
