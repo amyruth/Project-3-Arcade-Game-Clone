@@ -1,3 +1,6 @@
+// UDACITY FEND NANODEGREE PROJECT 3 - FROGGER CLONE
+// by Amy Rutherford, completed July 10 2018
+
 /* eslint-disable indent*/
 
 	let score = 0;
@@ -21,10 +24,13 @@
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 
+	//randomly places enemies on the stone block rows
 	const randomRow = function () {
 		return [60, 140, 225][Math.floor(Math.random() * [60, 140, 225].length)];
 	};
 
+	//used whenever game ends, win or lose
+	//resets player properties and gameboard
 	function gameReset() {
 		player.playerReset();
 		player.sprite = players[randomizer(0, 4)];
@@ -46,9 +52,6 @@
 
 	// Enemies our player must avoid
 	let Enemy = function () {
-		// Variables applied to each of our instances go here,
-		// we've provided one for you to get started
-
 		// The image/sprite for our enemies, this uses
 		// a helper we've provided to easily load images
 		this.sprite = 'images/enemy-bug.png';
@@ -72,7 +75,11 @@
 	Enemy.prototype.update = function (dt) {
 		// You should multiply any movement by the dt parameter
 		// which will ensure the game runs at the same speed for all computers.
+
+		// checks for collision with player,
+		// then resets enemy position when the road is crossed
 		this.checkCollisions();
+
 		//point where enemy goes off screen right
 		this.endOfRowX = this.x > 501;
 
@@ -124,6 +131,7 @@
 		lives.textContent = this.lives;
 	};
 
+	//returns player to starting position
 	Player.prototype.playerReset = function () {
 		this.x = 200;
 		this.y = 400;
