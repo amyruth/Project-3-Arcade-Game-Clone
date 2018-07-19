@@ -3,7 +3,7 @@
 
 Project 3, coded by Amy Rutherford.
 
-# 07/19/2018 UPDATE: Game is now controllable by keyboard only. Mouse is optional.
+### 07/19/2018 UPDATE: Game is now controllable by keyboard only. Mouse is optional.
 
 # Installation
 
