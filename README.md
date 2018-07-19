@@ -3,6 +3,8 @@
 
 Project 3, coded by Amy Rutherford.
 
+# 07/19/2018 UPDATE: Game is now controllable by keyboard only. Mouse is optional.
+
 # Installation
 
 Clone this repo or download the zip file at https://github.com/amyruth/Project-3-Arcade-Game-Clone
