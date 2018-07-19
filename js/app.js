@@ -98,10 +98,10 @@ Enemy.prototype.render = function () {
 };
 
 Enemy.prototype.checkCollisions = function () {
-	if (player.x + 40 > this.x - 40 &&
-		player.x - 40 < this.x + 40 &&
-		player.y + 40 > this.y - 40 &&
-		player.y - 40 < this.y + 40) {
+	if (player.x + 34 > this.x - 34 &&
+		player.x - 34 < this.x + 34 &&
+		player.y + 34 > this.y - 34 &&
+		player.y - 34 < this.y + 34) {
 		player.livesLeft();
 		player.playerReset();
 	}
