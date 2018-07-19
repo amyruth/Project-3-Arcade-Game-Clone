@@ -48,6 +48,8 @@ let Engine = (function (global) {
 		//brings up win modal and pauses game for win or lose condition
 		if (score === 200) {
 			winModal.classList.remove('modal-hide');
+			winModal.setAttribute('tabindex', '0');
+			winModal.focus();
 		} else if (player.lives === 0) {
 			endGame();
 		} else {

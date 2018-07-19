@@ -44,10 +44,12 @@ function keepScore() {
 	score += 20;
 	scoreArea.textContent = score;
 }
-
+var instructions = document.querySelector('.instructions');
 //out of lives/game over modal
 function endGame() {
 	gameOver.classList.remove('modal-hide');
+	gameOver.setAttribute('tabindex', '0');
+	gameOver.focus();
 }
 
 // Enemies our player must avoid
@@ -202,4 +204,18 @@ gameOver.addEventListener('click', function () {
 winModal.addEventListener('click', function () {
 	gameReset();
 	winModal.classList.add('modal-hide');
+});
+
+winModal.addEventListener('keydown', function (e) {
+	if(e.keyCode === 27) {
+		gameReset();
+		winModal.classList.add('modal-hide');
+	}
+});
+
+gameOver.addEventListener('keydown', function(e) {
+	if(e.keyCode === 27) {
+		gameReset();
+		gameOver.classList.add('modal-hide');
+	}
 });

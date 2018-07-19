@@ -19,7 +19,7 @@ body {
 .modal {
 	display: flex;
 	justify-content: space-evenly;
-	flex-direction: row;
+	flex-direction: column;
 	align-items: center;
 	align-self: center;
 	width: 400px;
@@ -35,6 +35,11 @@ body {
 	bottom: 300px;
 	margin: auto;
 	letter-spacing: 2px;
+}
+
+.gameOver:focus, .winScreen:focus {
+	border: 5px solid rgb(193, 218, 240);
+	/* outline: 4px solid rgb(193, 218, 240); */
 }
 
 .instructions {
